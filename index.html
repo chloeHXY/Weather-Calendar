@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>myCalendar</title>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="https://at.alicdn.com/t/font_2732169_mqy1pablblc.css">
+</head>
+
+<body>
+    <!--创建日历-->
+    <div class="container">
+        <div class="title">2021年9月
+            <div class="f_right">
+                <i>&#xe63b;</i>
+                <input type="text" placeholder="北京" class="city">
+                <button class="btn">查询</button>
+            </div>
+        </div>
+    </div>
+    <!--创建日程表-->
+    <div class="plan">
+        <div class="p_title"><i>&#xe661;</i>&#xe62b; 我的日程表<button>清空列表</button></div>
+        <div class="p_body">
+            <ul>
+            </ul>
+        </div>
+        <div class="review">
+            <form action="">
+                待做事件 : <input type="text" name="todo" id="do"><br> 起始时间 : <input type="time" name="s_time" id="start_t"><br> 结束时间 : <input type="time" name="e_time" id="end_t"><br>
+                <button type="button">&#xe609;</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        //js:对日程表中
+        var plan = document.querySelector('.plan');
+        var p_title = document.querySelector('.p_title');
+        var pBody = document.querySelector('.p_body');
+        var ul = pBody.querySelector('ul');
+        var lis = ul.children;
+        var p_button = p_title.querySelector('button');
+        var review = document.querySelector('.review');
+        var butn = review.querySelector('button');
+        var inputs = review.querySelectorAll('input');
+        var del = p_title.querySelector('i');
+        del.style.cursor = 'pointer';
+        del.addEventListener('click', function() {
+                plan.style.display = 'none';
+            })
+            //为按钮添加一键清除功能
+        p_button.addEventListener('click', function() {
+                ul.innerHTML = " ";
+                window.localStorage.clear();
+            })
+            //为添加框（review）绑定事件
+            //失焦事件发生一定要先获得焦点，不断获取，不断失去，每次都会判段
+        butn.disabled = true;
+        inputs[0].addEventListener('blur', function() {
+            butn.disabled = inputs[0].value === '';
+        })
+        butn.addEventListener('click', function() {
+            //点击添加按钮后，创建li元素，并将表单值填入
+            var li = document.createElement('li');
+            var check = document.createElement('input');
+            var ctn = document.createElement('em');
+            check.type = 'checkbox';
+            check.setAttribute('rank', lis.length + '');
+            check.addEventListener('click', function() {
+                console.log('您已经点击复选框啦');
+                list1[0] = check.checked;
+                console.log(list1[0]);
+                localStorage.setItem(cot + 'recent' + this.getAttribute('rank'), JSON.stringify(list1));
+                if (this.checked === true) {
+                    li.style.textDecoration = "line-through";
+                    li.style.opacity = '0.1';
+                } else {
+                    li.style.textDecoration = "none";
+                    li.style.opacity = '1';
+                }
+            })
+            ctn.innerHTML = "&nbsp;&nbsp;&nbsp;" + inputs[0].value;
+            //采用data-text属性为伪元素content赋值
+            li.setAttribute('data-text', inputs[1].value + '--' + inputs[2].value);
+            li.appendChild(check);
+            li.appendChild(ctn);
+            ul.appendChild(li);
+            //添加日程的同时，存入数据
+            var list1 = [false, li.innerText, li.getAttribute('data-text')];
+            localStorage.setItem(cot + 'recent' + (lis.length - 1), JSON.stringify(list1)); //表示第零个
+            //点击按钮后，表单初始化为空，按钮默认禁用
+            for (var j = 0; j < 3; j++) {
+                inputs[j].value = '';
+            }
+            butn.disabled = true;
+            console.log(lis[0]);
+        })
+
+        function act() {
+            var j = 0;
+            ul.innerHTML = "";
+            //若local缓存中已经有该日期下的数据了，则将该数据写入，当前日程表
+            //日程表ul只有一个，只是每次的内容展示不同，所以每次切换后都应该初始化页面
+            // if(localStorage.getItem(cot+'recent'+0)===null){ul.innerHTML=" ";}
+            while (localStorage.getItem(cot + 'recent' + j) !== null) {
+                var list = JSON.parse(localStorage.getItem(cot + 'recent' + j));
+                console.log(list);
+                //创建li元素，并添加复选框组件
+                var li = document.createElement('li');
+                var check = document.createElement('input');
+                var ctn = document.createElement('em');
+                ctn.innerHTML = list[1];
+                check.type = 'checkbox';
+                check.setAttribute('rank', lis.length + '');
+                check.addEventListener('click', function() {
+                        console.log('您已经点击复选框啦');
+                        var list2 = [this.checked, this.parentElement.innerText, this.parentElement.getAttribute('data-text')]
+                        localStorage.setItem(cot + 'recent' + this.getAttribute('rank'), JSON.stringify(list2));
+                        if (this.checked === true) {
+                            this.parentElement.style.textDecoration = "line-through";
+                            this.parentElement.style.opacity = '0.1';
+                        } else {
+                            this.parentElement.style.textDecoration = "none";
+                            this.parentElement.style.opacity = '1';
+                        }
+                    })
+                    //设置日程时间
+                li.setAttribute('data-text', list[2]);
+                li.appendChild(check);
+                li.appendChild(ctn);
+                //设置复选框状态
+                li.querySelector('input').checked = list[0];
+                if (list[0] === true) {
+                    console.log(333);
+                    li.style.textDecoration = "line-through";
+                    li.style.opacity = '0.1';
+                } else {
+                    console.log(11);
+                    li.style.textDecoration = "none";
+                    li.style.opacity = '1';
+                }
+                ul.appendChild(li);
+                j++;
+            }
+            console.log(32583);
+
+            //原butn点击函数位置
+        }
+    </script>
+    <script>
+        //对于日历：
+        var cot;
+        var container = document.querySelector('.container');
+        var arr = ['一', '二', '三', '四', '五', '六', '日'];
+        for (var i = 0; i < 42; i++) {
+            var node = document.createElement('div');
+            if (i < 7) {
+                node.className = 'week';
+                node.innerHTML = arr[i]
+            } else {
+                node.className = 'day';
+                if ((i - 8) < 10 && (i - 8) > 0) {
+                    node.innerHTML = '0' + (i - 8);
+                } else if ((i - 8) <= 0) {
+                    node.innerHTML = (31 + i - 8) + '';
+                } else if ((i - 8) > 30) {
+                    node.innerHTML = '0' + (i - 38);
+                } else {
+                    node.innerHTML = i - 8 + '';
+                }
+            }
+            node.setAttribute('count', node.innerHTML);
+            container.appendChild(node);
+            node.addEventListener('click', function() {
+                cot = this.getAttribute('count');
+                // this.setAttribute('count',cot*(-1)+'');
+                // console.log(this.getAttribute('count'));
+                plan.style.display = 'block';
+                act();
+            })
+        }
+    </script>
+    <!--天气接口-->
+    <script src="javascript/jquery.min.js"></script>
+    <script src="javascript/index.js"></script>
+
+</body>
+
+</html>

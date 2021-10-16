@@ -1,0 +1,187 @@
+body{
+    background:linear-gradient(rgb(31 84 127 / 30%),rgb(44 88 88 / 53%) );
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+button,
+input {
+    /* "\5B8B\4F53" 就是宋体的意思 这样浏览器兼容性比较好 */
+    font-family: Microsoft YaHei, Heiti SC, tahoma, arial, Hiragino Sans GB, "\5B8B\4F53", sans-serif;
+    /*去掉选中框时的蓝色效果*/
+    outline: none;
+}
+li{
+    list-style: none;
+}
+i{
+    font-family: iconfont, serif;
+    font-style: normal;
+    font-size: 22px;
+    color:red;
+}
+.container{
+    display: flex;
+    justify-content: space-evenly;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+    width: 680px;
+    height: 811px;
+    margin:100px auto;
+    background-color: #ededed;
+}
+.title{
+    width: 100%;
+    height: 50px;
+    border-bottom: 2px solid #fff;
+    padding-left:286px;
+    line-height: 50px;
+    font-size: 20px;
+    color:#454b4e;
+}
+.f_right{
+
+    float: right;
+}
+.city{
+    width: 54px;
+    height: 23px;
+    border:0;
+    border-bottom:1px solid #222222;
+    background-color: transparent;
+    /*font-size: 19px;*/
+    /*color:#eeeeee;*/
+}
+.btn{
+    /*font-size: 18px;*/
+    width: 35px;
+}
+.day{
+    width: 90px;
+    height: 136px;
+    padding:3px 0 0 5px;
+    background-color: #ffffffb3;
+    font-size: 15px;
+    color:#000;
+    /*font-weight: bold;*/
+}
+.weather{
+    display: flex;
+    justify-content: center;
+    flex-flow: wrap;
+    width: 90px;
+}
+.weather .img{
+    width:64px;
+    height: 64px;
+}
+.weather .img img{
+    width:100%;
+    height: 100%;
+}
+.tem{
+    font-size: 21px;
+}
+.de_wea{
+    font-size: 16px;
+    color:#758090;
+}
+.week{
+    width: 90px;
+    height: 40px;
+    background-color: #ededed;
+    text-align: center;
+    line-height: 40px;
+    font-size: 16px;
+    color:#abacad;
+}
+.plan{
+    display: none;
+    transform: translate(0,0);
+    position: absolute;
+    top: 100px;
+    right: 70px;
+    width: 400px;
+    height: 630px;
+    background:linear-gradient(rgb(13 58 94 / 30%),rgb(130 131 131 / 37%) );
+}
+.p_title{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    border-bottom: 2px solid #758090;
+    text-align: center;
+    line-height: 50px;
+    font-size: 20px;
+    color:#333333;
+    font-family: Microsoft YaHei, iconfont, serif;
+}
+.p_title button{
+    position: absolute;
+    right: 10px;
+    top: 17px;
+}
+.p_title i{
+    font-family: iconfont, serif;
+    position: absolute;
+    left: 2px;
+    top: -10px;
+}
+.p_body{
+    height: 448px;
+    width: 100%;
+    margin-top:25px;
+    overflow: auto;
+}
+.p_body ul li{
+    position: relative;
+    width: 100%;
+    height: 60px;
+    padding-left: 20px;
+    background:linear-gradient(to right,rgb(63 149 129 / 0%),rgb(253 255 255) );
+    margin-bottom: 5px;
+    line-height: 60px;
+    font-size: 17px;
+    /*text-decoration: line-through;*/
+
+}
+.p_body ul li::after{
+    content:attr(data-text);
+    position: absolute;
+    right: 20px;
+    /*top: 5px;*/
+    font-size: 16px;
+}
+ .review{
+    position: fixed;
+    left: 10px;
+    bottom: 10px;
+    width: 380px;
+    height: 80px;
+     text-align: center;
+    background-color: #eeeeee;
+    /*border:1px solid #333333;*/
+}
+.review button{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50px;
+    height: 80px;
+    border:0;
+    border-right:1px solid #222222;
+    font-family: Microsoft YaHei, iconfont, serif;
+    font-size: 30px;
+    cursor: pointer;
+}
+.review input{
+    border:0;
+    border-bottom:1px solid #222222;
+    background-color: transparent;
+}
+input[type="checkbox"]{
+    width: 15px;
+    height: 15px;
+}

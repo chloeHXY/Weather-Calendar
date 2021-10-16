@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/LocationList" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/image" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/image/WeatherIcon" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/image/vue-devtools" vcs="Git" />
+  </component>
+</project>
